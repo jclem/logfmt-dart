@@ -1,12 +1,6 @@
 library logfmt.parser;
 
 class Parser {
-  bool debug = false;
-
-  Logfmt({bool debug}) {
-    if (debug != null) this.debug = debug;
-  }
-
   Map<String, dynamic> parse(String string) {
     List data = this._stripTrailingNewline(string).split('');
     Map<String, dynamic> map = new Map<String, dynamic>();
@@ -54,29 +48,20 @@ class Parser {
       if (char == '=' && !inQuote) {
         inKey = false;
         inValue = true;
-        _debug('split');
       } else if (char == '"') {
         hadQuote = true;
         inQuote = !inQuote;
-        _debug('in quote: $inQuote');
       } else if (char != ' ' && !inValue && !inKey) {
         inKey = true;
         key = char;
-        _debug('start key: $char');
       } else if (inKey) {
         key += char;
-        _debug('append key: $char');
       } else if (inValue) {
         value += char;
-        _debug('append value: $char');
       }
     }
 
     return map;
-  }
-
-  void _debug(String string) {
-    if (this.debug) print(string);
   }
 
   String _stripTrailingNewline(String string) {
