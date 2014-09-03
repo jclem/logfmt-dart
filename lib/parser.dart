@@ -1,5 +1,17 @@
 part of logfmt;
 
+/**
+ * An object which parses a string of logfmt-style key-value pairs into a [Map].
+ *
+ * Example:
+ *
+ *     Parser parser = new Parser();
+ *     parser.parse('foo=bar');       // { 'foo': 'bar' }
+ *     parser.parse('foo');           // { 'foo': true }
+ *     parser.parse('foo=true');      // { 'foo': true }
+ *     parser.parse('foo=null');      // { 'foo': null }
+ *     parser.parse('foo="bar baz"'); // { 'foo': 'bar baz' }
+ */
 class Parser {
   Map<String, dynamic> parse(String string) {
     List data = this._stripTrailingNewline(string).split('');
@@ -27,6 +39,8 @@ class Parser {
             value = true;
           } else if (value == 'false') {
             value = false;
+          } else if (value == 'null') {
+            value = null;
           } else if (value == '' && !hadQuote) {
             value = null;
           }

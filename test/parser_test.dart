@@ -32,6 +32,10 @@ void main() {
     expect({ 'test=true': 'value' }, equals(parser.parse('"test=true"=value')));
   });
 
+  test('null parses to null', () {
+    expect({ 'test': null }, equals(parser.parse('test=null')));
+  });
+
   test('complex string parses', () {
     String string = 'foo=bar a=14 baz="hello \tquotes" '
       'cool%story=bro f %^asdf '
