@@ -1,35 +1,35 @@
-import 'package:logfmt/logfmt.dart';
+import 'package:logfmt/parser.dart';
 import 'package:unittest/unittest.dart';
 
-Logfmt logfmt = new Logfmt();
+Parser parser = new Parser();
 
 void main() {
   test('simple flag parses to true', () {
-    expect({ 'test': true }, equals(logfmt.parse('test')));
+    expect({ 'test': true }, equals(parser.parse('test')));
   });
 
   test('simple key/value parses to map', () {
-    expect({ 'foo': 'bar' },equals(logfmt.parse('foo=bar')));
+    expect({ 'foo': 'bar' },equals(parser.parse('foo=bar')));
   });
 
   test('escape sequences parse', () {
-    expect({ 'test': '\'escaped\'' }, equals(logfmt.parse('test=\'escaped\'')));
+    expect({ 'test': '\'escaped\'' }, equals(parser.parse('test=\'escaped\'')));
   });
 
   test('simple boolean parses', () {
-    expect({ 'test': true }, equals(logfmt.parse('test=true')));
+    expect({ 'test': true }, equals(parser.parse('test=true')));
   });
 
   test('numbers parse to strings', () {
-    expect({ 'test': '123' }, equals(logfmt.parse('test=123')));
+    expect({ 'test': '123' }, equals(parser.parse('test=123')));
   });
 
   test('values with equals', () {
-    expect({ 'test': 'foo=bar' }, equals(logfmt.parse('test="foo=bar"')));
+    expect({ 'test': 'foo=bar' }, equals(parser.parse('test="foo=bar"')));
   });
 
   test('keys with equals', () {
-    expect({ 'test=true': 'value' }, equals(logfmt.parse('"test=true"=value')));
+    expect({ 'test=true': 'value' }, equals(parser.parse('"test=true"=value')));
   });
 
   test('complex string parses', () {
@@ -37,7 +37,7 @@ void main() {
       'cool%story=bro f %^asdf '
       'code=H12 path=/hello/user@example.com/close';
 
-    Map result = logfmt.parse(string);
+    Map result = parser.parse(string);
 
     expect({
       'foo': 'bar',
