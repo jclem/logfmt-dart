@@ -13,6 +13,28 @@ part of logfmt;
  *     parser.parse('foo="bar baz"'); // { 'foo': 'bar baz' }
  */
 class Parser {
+  /**
+   * Parses a string of logfmt-style key-value pairs into a [Map].
+   *
+   * The string should be a space-separated list of `'key=value'` pairs, such
+   * as:
+   *
+   *     req.method=GET req.path=/apps req.status=200 req.elapsed=50ms
+   *
+   * This string would parse into a [Map] that looks like the following:
+   *
+   *     {
+   *       'req.method': 'GET',
+   *       'req.path': '/apps',
+   *       'req.status': '200',
+   *       'req.elapsed': '50ms'
+   *     }
+   *
+   * Keys or values with spaces in them should be quoted, such as in
+   * `'"a key"="a value"'`. The only values parsed to something other than a
+   * string are `'true'`, `'false'`, and `'null'`, which parse, respectively,
+   * to `true`, `false`, and `null`.
+   */
   Map<String, dynamic> parse(String string) {
     List data = this._stripTrailingNewline(string).split('');
     Map<String, dynamic> map = new Map<String, dynamic>();
