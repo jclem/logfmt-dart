@@ -7,9 +7,9 @@ class Logfmt {
     if (debug != null) this.debug = debug;
   }
 
-  Map parse(String string) {
+  Map<String,dynamic> parse(String string) {
     List data = this._stripTrailingNewline(string).split('');
-    Map<String,Object> map = new Map<String,Object>();
+    Map<String,dynamic> map = new Map<String,dynamic>();
 
     String key = '';
     var value = '';
