@@ -1,4 +1,4 @@
-import 'package:logfmt/parser.dart';
+import 'package:logfmt/logfmt.dart';
 import 'package:unittest/unittest.dart';
 
 Parser parser = new Parser();

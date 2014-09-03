@@ -1,4 +1,4 @@
-library logfmt.parser;
+part of logfmt;
 
 class Parser {
   Map<String, dynamic> parse(String string) {

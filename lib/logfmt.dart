@@ -1,2 +1,2 @@
 library logfmt;
-export 'package:logfmt/parser.dart';
+part 'parser.dart';
