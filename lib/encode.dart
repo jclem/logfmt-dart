@@ -18,25 +18,25 @@ String encode(Map<String, dynamic> map) {
       line += ' ';
     }
 
-    line += '${encodeString(key)}=${encodeValue(value)}';
+    line += '${_encodeString(key)}=${_encodeValue(value)}';
   });
 
   return line;
 }
 
-String encodeValue(dynamic value) {
+String _encodeValue(dynamic value) {
   Type type = value.runtimeType;
 
   if (type == DateTime) {
     return value.toUtc().toIso8601String();
   } else if (type == String) {
-    return encodeString(value);
+    return _encodeString(value);
   } else {
-    return encodeString(value.toString());
+    return _encodeString(value.toString());
   }
 }
 
-String encodeString(String string) {
+String _encodeString(String string) {
   if (string.contains(' ')) {
     return '"$string"';
   } else if (string.contains('\n')) {
