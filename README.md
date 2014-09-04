@@ -40,6 +40,54 @@ void main() {
 }
 ```
 
+### #encode
+
+Given a `Map<String, dynamic>`, encode it into a logfmt-style string using `#encode`:
+
+```dart
+import 'package:logfmt/logfmt.dart' as logfmt;
+import 'package:unittest/unittest.dart';
+
+void main() {
+  test('encodes Map<String, String> into plain key=value.', () {
+    expect(logfmt.encode({ 'key': 'value' }), equals('key=value'));
+  });
+  
+  test('encodes Map<String, bool> into key=${bool.toString}', () {
+    expect(logfmt.encode({ 'key': true }), equals('key=true'));
+  });
+  
+  test('encodes Map<String, Null> into key=${null.toString}', () {
+    expect(logfmt.encode({ 'key': null }), equals('key=null'));
+  });
+  
+  test('encodes long doubles as truncated', () {
+    expect(logfmt.encode({ 'longDouble': 0.44444444444444444444 }),
+      equals('longDouble=0.4444444444444444'));
+  });
+  
+  test('encodes dates as UTC ISO 8601', () {
+    DateTime date = new DateTime.now();
+
+    expect(logfmt.encode({ 'date': date }),
+      equals('date=${date.toUtc().toIso8601String()}'));
+  });
+  
+  test('encodes multi-word strings as quoted', () {
+    expect(logfmt.encode({ 'key': 'quoted value' }),
+      equals('key="quoted value"'));
+  });
+
+  test('encodes quotes as escaped quotes', () {
+    expect(logfmt.encode({ 'key': '"value' }), equals(r'key=\"value'));
+  });
+
+  test('encodes new lines with literal \\n characters', () {
+    expect(logfmt.encode({ 'key': '\nvalue' }), equals(r'key=\nvalue'));
+  });
+}
+```
+
 ### streamDecoder
 
 A stream of lines can be sent to the `streamDecoder` transformer, which will return a stream emitting `Map<String, dynamic>` objects.

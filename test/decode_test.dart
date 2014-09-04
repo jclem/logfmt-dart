@@ -1,4 +1,4 @@
-library logfmt.parser_test;
+library logfmt.decode_test;
 
 import 'package:logfmt/logfmt.dart' as logfmt;
 import 'package:unittest/unittest.dart';
