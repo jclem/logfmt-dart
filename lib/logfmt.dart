@@ -33,10 +33,10 @@ class Logger {
   final DateTime startTime = new DateTime.now();
 
   /// The key used to indicate elapsed time.
-  String elapsedKey = 'elapsed';
+  String elapsedKey;
 
   /// The [StringSink] to write to.
-  StringSink sink = stdout;
+  StringSink sink;
 
   /**
    * Create a new [Logger].
@@ -49,7 +49,15 @@ class Logger {
    * standard out, and an [elapsedKey] argument to use a key other than
    * "elapsed" when calling [logWithElapsed].
    */
-  Logger({this.sink, this.elapsedKey});
+  Logger({StringSink sink, String elapsedKey: 'elapsed'}) {
+    if (sink == null) {
+      this.sink = stdout;
+    } else {
+      this.sink = sink;
+    }
+
+    this.elapsedKey = elapsedKey;
+  }
 
   /**
    * Log the given [Map] to this logger's [sink].

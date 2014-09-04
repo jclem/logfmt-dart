@@ -22,6 +22,14 @@ void main() {
     });
 
     group('#logWithElapsed', () {
+      test('logs with a default elapsed key', () {
+        Logger logger = new Logger(sink: sink);
+        logger.logWithElapsed({ 'key': 'value' });
+        RegExp lineRegExp = new RegExp(r'^key=value elapsed=\d+ms\n$');
+        expect(sink.calls('write').first.args[0],
+          matches(lineRegExp));
+      });
+
       test('logs with the given elapsed key', () {
         logger.logWithElapsed({ 'key': 'value' });
         RegExp lineRegExp = new RegExp(r'^key=value duration=\d+ms\n$');
