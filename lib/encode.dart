@@ -1,5 +1,15 @@
 part of logfmt;
 
+/**
+ * Decodes a [Map] into a logfmt-style string.
+ *
+ * Example:
+ *
+ *     logfmt.encode({ 'foo': 'bar' }); // 'foo=bar'
+ *
+ * It ensures that any values with spaces are quoted, and any quotes or new
+ * lines are escaped, where necessary.
+ */
 String encode(Map<String, dynamic> map) {
   String line = '';
 
