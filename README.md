@@ -119,6 +119,24 @@ void main() {
 }
 ```
 
+### streamEncoder
+
+A stream of `Map<String, dynamic>` can be sent to the `streamEncoder`
+transformer, which will return a stream emitting logfmt-style strings.
+
+```dart
+import 'dart:async';
+import 'package:logfmt/logfmt.dart' as logfmt;
+
+void main() {
+  new Stream.fromIterable(maps)
+    .transform(logfmt.streamEncoder())
+    .listen((String line) {
+      print(line);
+    });
+}
+```
+
 ## Todo
 
 - Implement a timer.
