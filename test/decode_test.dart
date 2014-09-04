@@ -39,6 +39,10 @@ void main() {
       expect(logfmt.decode('test=null'), equals({ 'test': null }));
     });
 
+    test('decodes quoted single-word strings without quotes', () {
+      expect(logfmt.decode('test="value"'), equals({ 'test': 'value' }));
+    });
+
     test('decodes a complex string', () {
       String string = 'foo=bar a=14 baz="hello \tquotes" '
         'cool%story=bro f %^asdf '
