@@ -139,5 +139,4 @@ void main() {
 
 ## Todo
 
-- Implement a timer.
 - Implement an example request logger.
