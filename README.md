@@ -110,6 +110,6 @@ void main() {
 
 ## Todo
 
-- Implement #encode and piping to a stream.
+- Implement piping to a stream.
 - Implement a timer.
 - Implement an example request logger.
