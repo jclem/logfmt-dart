@@ -1,9 +1,8 @@
 library logfmt.log_test;
 
-import 'dart:io';
 import 'package:logfmt/logfmt.dart' as logfmt;
-import 'package:mock/mock.dart';
 import 'package:unittest/unittest.dart';
+import 'mock_sink.dart';
 
 void main() {
   group('#log', () {
@@ -13,10 +12,4 @@ void main() {
       expect(sink.calls('write').first.args, equals(['key=value\n']));
     });
   });
-}
-
-class MockSink extends Mock implements Stdout {
-  noSuchMethod(Invocation invocation) {
-    return super.noSuchMethod(invocation);
-  }
 }
