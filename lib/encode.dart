@@ -29,8 +29,6 @@ String _encodeValue(dynamic value) {
 
   if (type == DateTime) {
     return value.toUtc().toIso8601String();
-  } else if (type == String) {
-    return _encodeString(value);
   } else {
     return _encodeString(value.toString());
   }
