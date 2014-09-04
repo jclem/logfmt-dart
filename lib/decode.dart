@@ -1,6 +1,5 @@
 part of logfmt;
 
-
 /**
  * Encodes a string of logfmt-style key-value pairs into a [Map].
  *

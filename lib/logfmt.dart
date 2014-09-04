@@ -62,7 +62,6 @@ class Logger {
     return _log(map, sink: sink);
   }
 
-
   /**
    * Logs the given [Map] to this logger's [sink] and adds to the map the
    * duration, in milliseconds, that has elapsed since this logger was created.
