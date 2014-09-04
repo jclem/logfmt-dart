@@ -1,7 +1,7 @@
 part of logfmt;
 
 /**
- * Encodes a string of logfmt-style key-value pairs into a [Map].
+ * Decodes a string of logfmt-style key-value pairs into a [Map].
  *
  * The string should be a space-separated list of `'key=value'` pairs, such
  * as:
