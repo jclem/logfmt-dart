@@ -50,5 +50,10 @@ void main() {
     test('encodes new lines with literal \\n characters', () {
       expect(logfmt.encode({ 'key': '\nvalue' }), equals(r'key=\nvalue'));
     });
+
+    test('encodes multiple key-value pairs separated by spaces', () {
+      expect(logfmt.encode({ 'key': 'value', 'foo': 'bar' }),
+        equals('key=value foo=bar'));
+    });
   });
 }

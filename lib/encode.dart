@@ -14,6 +14,10 @@ String encode(Map<String, dynamic> map) {
   String line = '';
 
   map.forEach((String key, dynamic value) {
+    if (line.length > 0) {
+      line += ' ';
+    }
+
     line += '${encodeString(key)}=${encodeValue(value)}';
   });
 
