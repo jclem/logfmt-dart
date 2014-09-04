@@ -2,5 +2,5 @@ library logfmt;
 
 import 'dart:async';
 
-part 'parser.dart';
-part 'streams.dart';
+part 'decode.dart';
+part 'stream_decoder.dart';
