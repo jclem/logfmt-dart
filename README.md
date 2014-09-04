@@ -9,6 +9,21 @@ through the `streamDecoder` transform will emit `Map<String, dynamic>` objects, 
 
 ## Usage
 
+### Logger
+
+A class which can log `Map<String, dynamic>`, and optionally include elapsed
+time since the logger was created.
+
+```dart
+import 'package:logfmt/logfmt.dart' as logfmt;
+
+void main() {
+  logfmt.Logger logger = new logfmt.Logger();
+  logger.log({ 'key': 'value' }); // Logs "key=value" to stdout.
+  logger.logWithElapsed({ 'key': 'value' }); // Logs "key=value elapsed=1ms" to stdout.
+}
+```
+
 ### #decode
 
 Given a logfmt-style log line, decode it into a `Map<String, dynamic>` using `#decode`:
@@ -21,19 +36,19 @@ void main() {
   test('key=value pairs of non-null and non-boolean strings decode into [Map<String, String>].', () {
     expect(logfmt.decode('key=value'), equals({ 'key': 'value' }));
   });
-  
+
   test('"flag"s are decoded into [Map<String, bool>] where `bool` is `true`.', () {
     expect(logfmt.decode('flag'), equals({ 'flag': true }));
   });
-  
+
   test('Pairs with "true" or "false" as values are decoded into [Map<String, bool>], as appropriate.', () {
     expect(logfmt.decode('key=false'), equals({ 'key': false }));
   });
-  
+
   test('Pairs with "null" values are decoded into [Map<String, Null>].', () {
     expect(logfmt.decode('key=null'), equals({ 'key': null }));
   });
-  
+
   test('Quoted keys and values are preserved.', () {
     expect(logfmt.decode('"quoted key"="quoted value"'), equals({ 'quoted key': 'quoted value' }));
   });
@@ -52,27 +67,27 @@ void main() {
   test('encodes Map<String, String> into plain key=value.', () {
     expect(logfmt.encode({ 'key': 'value' }), equals('key=value'));
   });
-  
+
   test('encodes Map<String, bool> into key=${bool.toString}', () {
     expect(logfmt.encode({ 'key': true }), equals('key=true'));
   });
-  
+
   test('encodes Map<String, Null> into key=${null.toString}', () {
     expect(logfmt.encode({ 'key': null }), equals('key=null'));
   });
-  
+
   test('encodes long doubles as truncated', () {
     expect(logfmt.encode({ 'longDouble': 0.44444444444444444444 }),
       equals('longDouble=0.4444444444444444'));
   });
-  
+
   test('encodes dates as UTC ISO 8601', () {
     DateTime date = new DateTime.now();
 
     expect(logfmt.encode({ 'date': date }),
       equals('date=${date.toUtc().toIso8601String()}'));
   });
-  
+
   test('encodes multi-word strings as quoted', () {
     expect(logfmt.encode({ 'key': 'quoted value' }),
       equals('key="quoted value"'));
