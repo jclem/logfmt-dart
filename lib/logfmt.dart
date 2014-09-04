@@ -19,6 +19,7 @@ part 'decode.dart';
 part 'encode.dart';
 part 'log.dart';
 part 'stream_decoder.dart';
+part 'stream_encoder.dart';
 
 Function _log = log;
 
