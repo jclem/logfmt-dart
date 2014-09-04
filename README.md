@@ -88,6 +88,17 @@ void main() {
 }
 ```
 
+### #log
+
+Logs a `Map<String, dynamic>` to either standard out or a given `StringSink`.
+
+```dart
+import 'package:logfmt/logfmt.dart' as logfmt;
+
+logfmt.log({ 'key': 'value' }); // "key=value" is logged to standard out.
+logfmt.log({ 'key': 'value' }, sink: sink); // The log is written to `sink`.
+```
+
 ### streamDecoder
 
 A stream of lines can be sent to the `streamDecoder` transformer, which will return a stream emitting `Map<String, dynamic>` objects.
@@ -110,6 +121,5 @@ void main() {
 
 ## Todo
 
-- Implement piping to a stream.
 - Implement a timer.
 - Implement an example request logger.
