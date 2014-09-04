@@ -28,6 +28,12 @@ void main() {
         expect(sink.calls('write').first.args[0],
           matches(lineRegExp));
       });
+
+      test('does not modify its map', () {
+        Map map = { 'key': 'value' };
+        logger.logWithElapsed(map);
+        expect(map, equals({ 'key': 'value' }));
+      });
     });
   });
 }

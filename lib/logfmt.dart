@@ -77,13 +77,18 @@ class Logger {
    *     logger.logWithTime({ 'key': 'value' }); // Logs "key=value elapsed=15ms"
    */
   void logWithElapsed(Map<String, dynamic> map) {
-    map[elapsedKey] = '${elapsed.inMilliseconds}ms';
-    return log(map);
+    Map<String, dynamic> mapCopy = new Map<String, dynamic>();
+
+    map.forEach((String key, dynamic value) {
+      mapCopy[key] = value;
+    });
+
+    mapCopy[elapsedKey] = '${elapsed.inMilliseconds}ms';
+    return log(mapCopy);
   }
 
   /// The time that has elapsed since this logger was created.
   Duration get elapsed {
-    return new DateTime.now()
-      .difference(startTime);
+    return new DateTime.now().difference(startTime);
   }
 }
