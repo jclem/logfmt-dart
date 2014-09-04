@@ -1,6 +1,7 @@
 name: logfmt
-version: 0.0.0
-author: Jonathan Clem
+version: 0.1.0
+author: Jonathan Clem <jonathan@jclem.net>
+description: A set of tools for working with logfmt-style log lines.
 homepage: https://github.com/jclem/logfmt-dart
 dev_dependencies:
   path: '>=1.3.0 <2.0.0'
